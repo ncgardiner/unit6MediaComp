@@ -102,8 +102,24 @@ public class PictureTester
   
   public static void testGrayscale()
   {
-      Picture pix = new Picture("donald.jpg");
+      Picture pix = new Picture("donald3.jpg");
       pix.grayscale();
+      pix.explore();
+  }
+  
+  public static void testCropAndCopy()
+  {
+      Picture pix1 = new Picture("snowman.jpg");
+      Picture pix2 = new Picture("arch.jpg");
+      pix2.cropAndCopy(pix1,30,100,40,200,10,20);
+      pix2.explore();
+  }
+  
+  public static void testHalfSize()
+  {
+      Picture pix = new Picture("donald3.jpg");
+      pix.explore();
+      pix.halfSize();
       pix.explore();
   }
   
@@ -115,11 +131,8 @@ public class PictureTester
     // and comment out the ones you don't want
     // to run
     testZeroBlue();
-    //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
-    //testNegate();
-    //testGrayscale();
     // testFixUnderwater();
     testMirrorVerticalRightToLeft();
     testMirrorHorizontal();
@@ -129,13 +142,12 @@ public class PictureTester
     testNegate();
     testKeepOnlyBlue();
     testGrayscale();
+    testCropAndCopy();
     //testMirrorTemple();
-    //testMirrorArms();
     //testMirrorGull();
-    //testMirrorDiagonal();
     //testCollage();
     //testCopy();
-    //testEdgeDetection();
+    testEdgeDetection();
     //testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();

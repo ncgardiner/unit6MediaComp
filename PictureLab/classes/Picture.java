@@ -385,6 +385,67 @@ public class Picture extends SimplePicture
             }
     }
     
+    public void cropAndCopy(Picture from, int rowStart, int rowEnd, int colStart,
+    int colEnd, int newRow, int newCol)
+    {
+        Pixel[][] fromPixels = from.getPixels2D();
+        Pixel[][] newPixels = this.getPixels2D();
+        int rowCount = 0;
+        int colCount = 0;
+        for (int i = rowStart; i <= rowEnd; i++)
+        {
+            for (int j = colStart; j <= colEnd; j++)
+            {
+                newPixels[rowCount+newRow][colCount+newCol].setColor(fromPixels[i][j].getColor());
+                colCount++;
+            }
+            colCount=0;
+            rowCount++;
+        }
+    }
+    
+    public void halfSize()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (int i = 0; i < pixels.length; i+=2)
+            for (int j = 0; j < pixels[0].length; j+=2)
+                pixels[(i+1)/2][(j+1)/2].setColor(pixels[i][j].getColor());
+    }
+    
+    public void posterize()
+    {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels)
+            for (Pixel pixelObj : rowArray)
+            {
+                if (pixelObj.getGreen()<63)
+                    pixelObj.setGreen(31);
+                else if (pixelObj.getGreen()<127)
+                    pixelObj.setGreen(95);
+                else if (pixelObj.getGreen()<191)
+                    pixelObj.setGreen(149);
+                else
+                    pixelObj.setGreen(222);
+                if (pixelObj.getRed()<63)
+                    pixelObj.setRed(31);
+                else if (pixelObj.getRed()<127)
+                    pixelObj.setRed(95);
+                else if (pixelObj.getRed()<191)
+                    pixelObj.setRed(149);
+                else
+                    pixelObj.setRed(222);
+                if (pixelObj.getBlue()<63)
+                    pixelObj.setBlue(31);
+                else if (pixelObj.getBlue()<127)
+                    pixelObj.setBlue(95);
+                else if (pixelObj.getBlue()<191)
+                    pixelObj.setBlue(149);
+                else
+                    pixelObj.setBlue(222);
+            }
+        
+    }
+    
     /* Main method for testing - each class in Java can have a main 
      * method 
      */
